@@ -162,7 +162,7 @@ public class ArticleDetailFragment extends Fragment implements
                         .getIntent(), getString(R.string.action_share)));
             }
         });
-        CoordinatorLayout layout=(CoordinatorLayout) mRootView.findViewById(R.id.coordinator_layout);
+
 
         FloatingActionButton fab=(FloatingActionButton) mRootView.findViewById(R.id.share_fab);
         CoordinatorLayout.LayoutParams params=(CoordinatorLayout.LayoutParams) fab.getLayoutParams();
