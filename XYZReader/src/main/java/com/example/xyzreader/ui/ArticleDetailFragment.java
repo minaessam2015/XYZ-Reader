@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -60,6 +62,7 @@ public class ArticleDetailFragment extends Fragment implements
     private boolean mIsCard = false;
     private int mStatusBarFullOpacityBottom;
 
+
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
@@ -79,8 +82,7 @@ public class ArticleDetailFragment extends Fragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         ArticleDetailActivity activity=null;
-       Typeface typeface=Typeface.createFromAsset(getActivity().getAssets(),"Atrifika-Regular.ttf");
-        bodyView.setTypeface(typeface);
+
 
 
     }
@@ -160,7 +162,12 @@ public class ArticleDetailFragment extends Fragment implements
                         .getIntent(), getString(R.string.action_share)));
             }
         });
+        CoordinatorLayout layout=(CoordinatorLayout) mRootView.findViewById(R.id.coordinator_layout);
 
+        FloatingActionButton fab=(FloatingActionButton) mRootView.findViewById(R.id.share_fab);
+        CoordinatorLayout.LayoutParams params=(CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+        params.setBehavior(new FabBehavior(getActivity(),null));
+        fab.setLayoutParams(params);
         bindViews();
         //updateStatusBar();
         return mRootView;
@@ -215,9 +222,9 @@ public class ArticleDetailFragment extends Fragment implements
         TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
         bylineView.setMovementMethod(new LinkMovementMethod());
         bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        Typeface typeface=Typeface.createFromAsset(getActivity().getAssets(),"Artifika-Regular.ttf");
+        bodyView.setTypeface(typeface);
 
-
-        bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
         if (mCursor != null) {
             mRootView.setAlpha(0);
